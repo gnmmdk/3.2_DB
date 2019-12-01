@@ -1,0 +1,28 @@
+<updateXml><!--考虑内存问题 应该versionFrom 001 直接到versionTo v003 ；（另外需要都对每次数据库进行保存，例如创建封版的分支，否则怎么时间久了怎么还记得之前的字段）-->
+    <updateStep
+        versionFrom="V001,v002"
+        versionTo="V003">
+        <updateDb>
+            <!--对备份的表重新命名-->
+            <sql_rename>alter table tb_photo rename to bak_tb_photo;</sql_rename>
+            <!--创建一个新表-->
+            <sql_create>
+                create table if not exists tb_photo(
+                time TEXT,
+                path TEXT,
+                name TEXT,
+                lastupdateTime TEXT,
+                user_id Integer primary key
+                );
+            </sql_create>
+            <!--将备份表中的数据插到新表中-->
+            <sql_insert>
+                insert into tb_photo(time,path) select time,path from bak_tb_photo;
+            </sql_insert>
+            <!--删除之前的备份表-->
+            <sql_delete>
+                drop table if exists bak_tb_photo;
+            </sql_delete>
+        </updateDb>
+    </updateStep>
+</updateXml>

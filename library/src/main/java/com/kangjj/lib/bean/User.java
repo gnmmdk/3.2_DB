@@ -1,4 +1,4 @@
-package com.kangjj.db.bean;
+package com.kangjj.lib.bean;
 
 import com.kangjj.lib.annotation.DbField;
 import com.kangjj.lib.annotation.DbTable;
@@ -9,6 +9,10 @@ public class User {
     private Integer id;
     private String name;
     private String password;
+    private Integer Status;
+
+    public User() {
+    }
 
     public User(Integer id, String name, String password) {
         this.id = id;
@@ -40,12 +44,21 @@ public class User {
         this.password = password;
     }
 
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int status) {
+        Status = status;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", Status=" + Status +
                 '}';
     }
 }
