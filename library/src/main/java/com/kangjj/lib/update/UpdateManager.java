@@ -41,6 +41,7 @@ public class UpdateManager {
                 continue;
             }
             SQLiteDatabase database = SQLiteDatabase.openOrCreateDatabase(dbPath,null);
+            Log.e("kangjj","database.getVersion()="+database.getVersion());
             for (UpdateDb updateDb : updateDbs) {
                 String sql_rename = updateDb.getSql_rename();
                 String sql_create = updateDb.getSql_create();
